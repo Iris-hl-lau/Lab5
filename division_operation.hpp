@@ -11,7 +11,7 @@ class division_operation : public abstract_operation {
 public:
     static const char DIVISION_CODE = '/';
     division_operation() : abstract_operation(DIVISION_CODE){};
-    int perform(int n, int m) override {return n * m;}
+    int perform(int n, int m) override {return n / m;}
     virtual inline ~division_operation() {}
 };
 

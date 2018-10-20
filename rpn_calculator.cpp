@@ -7,6 +7,7 @@
 #include "subtraction_operation.hpp"
 #include "multiplication_operation.hpp"
 #include "division_operation.hpp"
+#include <sstream>
 
 
 operation* rpn_calculator::operation_type(char operation) {
@@ -23,5 +24,27 @@ operation* rpn_calculator::operation_type(char operation) {
 }
 
 void rpn_calculator::perform(operation *o) {
+    int b = stack.top();
+    stack.pop();
+    int a = stack.top();
+    stack.pop();
+    result = o->perform(a, b);
+    stack.push(result);
+}
 
+int rpn_calculator::process_form(std::string formula){
+    std::istringstream iss(formula);
+    std::string operand;
+    int num;
+    while(!iss.eof()) {
+        iss >> operand;
+        std::istringstream iss2(operand);
+
+        if(iss2 >> num) {
+            stack.push(num);
+        } else {
+            perform(operation_type(operand[0]));
+        }
+    }
+    return stack.top();
 }

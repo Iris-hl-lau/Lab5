@@ -7,15 +7,18 @@
 
 #include <iostream>
 #include <stack>
+#include <string>
 #include "operation.hpp"
 
 
 class rpn_calculator {
 private:
     int result;
-    std::stack<int>;
+    std::stack<int> stack;
     operation* operation_type(char operation);
     void perform(operation* o);
+public:
+    int process_form(std::string formula);
 };
 
 
